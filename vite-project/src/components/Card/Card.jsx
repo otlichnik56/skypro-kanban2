@@ -1,5 +1,5 @@
-import CardButton from './CardButton';
-import CardDate from './CardDate';
+import CardButton from '../CardButton/CardButton';
+import CardDate from '../CardDate/CardDate';
 
 function Card({ theme, title, date }) {
   return (

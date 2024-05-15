@@ -2,16 +2,16 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
-import ExitForm from './components/Form/ExitForm';
-import NewCard from './components/Form/NewCard';
-import BrowseCard from './components/Form/BrowseCard';
+import ExitForm from './components/popups/ExitForm/ExitForm';
+import NewCard from './components/popups/NewCard/NewCard';
+import BrowseCard from './components/popups/BrowseCard/BrowseCard';
 
 function App() {
 
   return (
     <>
 
-      <div class="wrapper">
+      <div className="wrapper">
 
       <>{/* pop-up start*/}</>
       
