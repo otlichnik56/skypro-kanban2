@@ -1,13 +1,14 @@
 import Card from '../Card/Card';
+import * as S from "./Column.styled.js"
 
 function Column({ title, cards }) {
   //console.log(cards);
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <S.MainColumn>
+      <S.ColumnTitle>
         <p>{title}</p>
-      </div>
-      <div className="cards">
+      </S.ColumnTitle>
+      <S.Cards>
         {cards.map((card) => (
           <Card
             key={card.id}
@@ -16,8 +17,8 @@ function Column({ title, cards }) {
             date={card.date}
           />
         ))}
-      </div>
-    </div>
+      </S.Cards>
+    </S.MainColumn>
   );
 }
 

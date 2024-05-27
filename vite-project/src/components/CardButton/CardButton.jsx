@@ -1,11 +1,13 @@
+import * as S from "./CardButton.styled.js"
+
 function CardButton() {
     return (
       <a href="#popBrowse" target="_self">
-        <div className="card__btn">
+        <S.CardButton>
           <div></div>
           <div></div>
           <div></div>
-        </div>
+        </S.CardButton>
       </a>
     );
   }

@@ -1,37 +1,38 @@
 import CardButton from '../CardButton/CardButton';
 import CardDate from '../CardDate/CardDate';
+import * as S from "./Card.styled.js"
 
 function Card({ theme, title, date }) {
   return (
-    <div className="cards__item">
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className={`card__theme _${getClassForTheme(theme)}`}>
-            <p className={`_${getClassForTheme(theme)}`}>{theme}</p>
-          </div>
+    <S.CardsItem>
+      <S.CardsCard>
+        <S.CardsGroup>
+          <S.CardTopic $topicColor={getClassForTheme(theme)}>
+            <S.TopicText $topicColor={getClassForTheme(theme)}>{theme}</S.TopicText>
+          </S.CardTopic>
           <CardButton />
-        </div>
-        <div className="card__content">
+        </S.CardsGroup>
+        <S.CardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{title}</h3>
+            <S.CardsTitle>{title}</S.CardsTitle>
           </a>
           <CardDate date={date} />
-        </div>
-      </div>
-    </div>
+        </S.CardContent>
+      </S.CardsCard>
+    </S.CardsItem>
   );
 }
 
 function getClassForTheme(theme) {
     switch (theme) {
       case 'Web Design':
-        return 'orange';
+        return '_orange';
       case 'Research':
-        return 'green';
+        return '_green';
       case 'Copywriting':
-        return 'purple';
+        return '_purple';
       default:
-        return 'default'; 
+        return '_default'; 
     }
   }
 

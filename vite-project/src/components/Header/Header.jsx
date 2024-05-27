@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from '/images/logo.png';
 import logoDark from '/images/logo_dark.png';
+import { Contener } from "../shared.styled.js"
 
 function Header({ cards, setCard }) {
 
@@ -26,7 +27,7 @@ function Header({ cards, setCard }) {
 
   return (
     <header className="header">
-      <div className="container">
+      <Contener>
         <div className="header__block">
           <div className="header__logo _show _light">
             <a href="" target="_self"><img src={logo} alt="logo" /></a>
@@ -54,7 +55,7 @@ function Header({ cards, setCard }) {
 
           </nav>
         </div>
-      </div>
+      </Contener>
     </header>
   );
 }

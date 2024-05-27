@@ -3,6 +3,8 @@ import Column from '../Column/Column';
 //import {cardList} from '../../data.js';
 import {statusList} from '../../data.js';
 import React, { useState, useEffect } from 'react';
+import * as S from "./Content.styled.js"
+import { Contener } from "../shared.styled.js"
 
 function Content({ cards }) {  
 
@@ -19,11 +21,11 @@ function Content({ cards }) {
     }
     
     return (
-        <main className="main">
-          <div className="container">
-            <div className="main__block">
+        <S.Main>
+          <Contener>
+            <S.MainBlock>
 
-                <div className="main__content">
+                <S.MainContent>
                 {statusList.map((status) => (
                   <Column
                     key={status}
@@ -31,11 +33,11 @@ function Content({ cards }) {
                     cards={cards.filter((card) => card.status === status)}
                   />
                 ))}
-                </div>
+                </S.MainContent>
 
-            </div>
-          </div>
-        </main>
+            </S.MainBlock>
+          </Contener>
+        </S.Main>
     );
     
 }
