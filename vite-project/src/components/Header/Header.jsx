@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '/images/logo.png';
 import logoDark from '/images/logo_dark.png';
 import { Contener } from "../shared.styled.js"
+import * as S from "./Header.styled.js"
 
 function Header({ cards, setCard }) {
 
@@ -26,16 +27,17 @@ function Header({ cards, setCard }) {
   }
 
   return (
-    <header className="header">
+    <S.Header>
       <Contener>
-        <div className="header__block">
-          <div className="header__logo _show _light">
+        <S.HeaderBlock>
+          <S.HeaderLogo>
             <a href="" target="_self"><img src={logo} alt="logo" /></a>
-          </div>
-          <div className="header__logo _dark">
+          </S.HeaderLogo>
+          <S.HeaderLogo>
             <a href="" target="_self"><img src={logoDark} alt="logo" /></a>
-          </div>
-          <nav className="header__nav">
+          </S.HeaderLogo>
+
+          <S.HeaderNav>
 
             <button onClick={onAddCard} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
 
@@ -53,10 +55,10 @@ function Header({ cards, setCard }) {
               </div>
             )}
 
-          </nav>
-        </div>
+          </S.HeaderNav>
+        </S.HeaderBlock>
       </Contener>
-    </header>
+    </S.Header>
   );
 }
 
