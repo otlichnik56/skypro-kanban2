@@ -1,15 +1,16 @@
 import * as S from "./CardButton.styled.js"
+import { Link } from "react-router-dom";
 
-function CardButton() {
+function CardButton({ id }) {
     return (
-      <a href="#popBrowse" target="_self">
+      <Link to={`/card/${id}`}>
         <S.CardButton>
           <div></div>
           <div></div>
           <div></div>
         </S.CardButton>
-      </a>
+      </Link>
     );
   }
   
-  export default CardButton;
+export default CardButton;

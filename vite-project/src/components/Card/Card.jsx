@@ -1,8 +1,10 @@
 import CardButton from '../CardButton/CardButton';
 import CardDate from '../CardDate/CardDate';
 import * as S from "./Card.styled.js"
+import { Link } from "react-router-dom";
 
-function Card({ theme, title, date }) {
+function Card({ id, theme, title, date }) {
+
   return (
     <S.CardsItem>
       <S.CardsCard>
@@ -10,12 +12,12 @@ function Card({ theme, title, date }) {
           <S.CardTopic $topicColor={getClassForTheme(theme)}>
             <S.TopicText $topicColor={getClassForTheme(theme)}>{theme}</S.TopicText>
           </S.CardTopic>
-          <CardButton />
+          <CardButton id={id} />
         </S.CardsGroup>
         <S.CardContent>
-          <a href="" target="_blank">
+          <Link to={`/card/${id}`}>
             <S.CardsTitle>{title}</S.CardsTitle>
-          </a>
+          </Link>
           <CardDate date={date} />
         </S.CardContent>
       </S.CardsCard>
