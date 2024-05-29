@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
 import './App.css';
-//import Header from './components/Header/Header';
-//import Content from './components/Content/Content';
-//import ExitFormPopup from './components/popups/ExitFormPopup/ExitFormPopup.jsx';
-//import NewCardPopup from './components/popups/NewCardPopup/NewCardPopup';
-//import BrowseCardPopup from './components/popups/BrowseCardPopup/BrowseCardPopup';
-//import {cardList} from './data.js';
-//import { GlobalStyle } from './global.styled.js';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import MainPage from './pages/MainPage/MainPage.jsx';

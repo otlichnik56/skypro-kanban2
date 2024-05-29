@@ -5,9 +5,9 @@ function CardButton({ id }) {
     return (
       <Link to={`/card/${id}`}>
         <S.CardButton>
-          <div></div>
-          <div></div>
-          <div></div>
+          <S.Pointer />
+          <S.Pointer />
+          <S.Pointer />
         </S.CardButton>
       </Link>
     );
