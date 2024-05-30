@@ -20,6 +20,12 @@ export const HeaderBlock = styled.div`
 
 export const HeaderLogo = styled.div`
   width: 85px;
+  overflow: hidden;
+`;
+
+export const HeaderLogoImage = styled.img`
+  width: 100%;
+  height: auto;
 `;
 
 export const HeaderNav = styled.nav`

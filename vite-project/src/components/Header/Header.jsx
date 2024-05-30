@@ -32,10 +32,10 @@ function Header({ cards, setCard }) {
       <Contener>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="" target="_self"><img src={logo} alt="logo" /></a>
+            <a href="" target="_self"><S.HeaderLogoImage src={logo} alt="logo" /></a>
           </S.HeaderLogo>
           <S.HeaderLogo>
-            <a href="" target="_self"><img src={logoDark} alt="logo" /></a>
+            <a href="" target="_self"><S.HeaderLogoImage src={logoDark} alt="logo" /></a>
           </S.HeaderLogo>
 
           <S.HeaderNav>

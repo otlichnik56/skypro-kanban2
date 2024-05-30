@@ -77,3 +77,15 @@ a {
   font-family: "Roboto", sans-serif;
 }
 `;
+
+export const GlobalNotFoundStyle = createGlobalStyle`
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #EAEEF6;
+}
+`;

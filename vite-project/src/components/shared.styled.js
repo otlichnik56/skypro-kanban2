@@ -156,3 +156,17 @@ export const StyledBtmLink = styled(Link)`
   align-items: center;
   justify-content: center;
 `;
+
+export const NotFoundContainer = styled.div`
+  text-align: center;
+  h1 {
+            font-size: 96px;
+            margin: 0;
+            color: #333;
+    }
+  p {
+            font-size: 24px;
+            margin: 0;
+            color: #666;
+    }
+`;

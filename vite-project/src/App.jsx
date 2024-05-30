@@ -7,6 +7,7 @@ import CardPage from './pages/CardPage/CardPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegPage from './pages/RegPage/RegPage.jsx';
 import ExitPage from './pages/ExitPage/ExitPage.jsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
     REG: "/reg",
     MAIN: "/",
     CARD: "/card/:id",
-    EXIT: "/exit"
+    EXIT: "/exit",
+    NOTFOUND: "*"
   };
 
   return (
@@ -34,6 +36,7 @@ function App() {
       </Route>
       <Route path={appRoutes.LOGIN} element={<LoginPage />} />
       <Route path={appRoutes.REG} element={<RegPage />} />
+      <Route path={appRoutes.NOTFOUND} element={<NotFoundPage />} />
     </Routes>
   );
 }

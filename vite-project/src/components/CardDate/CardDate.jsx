@@ -14,7 +14,7 @@ function CardDate({ date }) {
 				</clipPath>
 			</defs>
 		</svg>
-      	<p>{date}</p>
+      	<S.CardDateText>{date}</S.CardDateText>
     </S.CardDate>
   );
 }
