@@ -1,8 +1,41 @@
-import '../../App.css';
+//import '../../App.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "../../components/shared.styled.js"
 import { GlobalSignStyle } from '../../global.styled.js';
+import { registerUser } from '../../services/api.js';
+import { removeUserFromLocalStorage, saveUserToLocalStorage } from "../../services/helper.js";
 
 function RegPage (){
+
+    removeUserFromLocalStorage();
+    const navigate = useNavigate();
+
+    const [login, setLogin] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [regError, setRegError] = useState("");
+  
+    const handleGetUserClick = async () => {
+
+        try{
+            if(!login && !name && !password){
+                setLoginError("Не все поля заполнены");
+                return;
+              }          
+            const user = await registerUser({login: login, name: name, password: password});
+            saveUserToLocalStorage(user);
+            setLogin("");
+            setName("");
+            setPassword("");
+            setRegError("");
+            navigate("/");
+        } catch(error){
+            setRegError(error.message);
+        }
+    }
+  
+
     return (
         <>
             <GlobalSignStyle />
@@ -14,10 +47,13 @@ function RegPage (){
                                 <h4>Регистрация</h4>
                             </S.ModalTtl>
                             <S.ModalForm>
-                                <S.TextInput />
-                                <S.EmailInput />
-                                <S.PasswordInput />
-                                <S.ModalButton><S.StyledBtmLink to="/">Зарегистрироваться</S.StyledBtmLink> </S.ModalButton>
+                                <S.TextInput value={name} onChange={(event) => {setName(event.target.value)}} />
+                                <S.EmailInput value={login} onChange={(event) => {setLogin(event.target.value)}} />
+                                <S.PasswordInput value={password} onChange={(event) => {setPassword(event.target.value)}} />
+                                {regError && <S.ModalError>{regError}</S.ModalError>}
+                                <S.ModalButton onClick={handleGetUserClick}>
+                                    Зарегистрироваться 
+                                </S.ModalButton>
                                 <S.ModalFormGroup>
                                     <p>Уже есть аккаунт?  
                                         <S.StyledLink to="/login">Войдите здесь</S.StyledLink>

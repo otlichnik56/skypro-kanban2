@@ -75,6 +75,15 @@ export const ModalFormGroup = styled.div`
   }
 `;
 
+export const ModalError = styled.p`
+  text-align: center;
+  color: rgba(255, 0, 0, 1);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.14px;
+`;
+
 
 
 export const StyledLink = styled(Link)`
@@ -155,4 +164,18 @@ export const StyledBtmLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const NotFoundContainer = styled.div`
+  text-align: center;
+  h1 {
+    font-size: 96px;
+    margin: 0;
+            color: #333;
+  }
+  p {
+    font-size: 24px;
+    margin: 0;
+    color: #666;
+  }
 `;

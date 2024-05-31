@@ -3,14 +3,14 @@ import CardDate from '../CardDate/CardDate';
 import * as S from "./Card.styled.js"
 import { Link } from "react-router-dom";
 
-function Card({ id, theme, title, date }) {
+function Card({ id, topic, title, date }) {
 
   return (
     <S.CardsItem>
       <S.CardsCard>
         <S.CardsGroup>
-          <S.CardTopic $topicColor={getClassForTheme(theme)}>
-            <S.TopicText $topicColor={getClassForTheme(theme)}>{theme}</S.TopicText>
+          <S.CardTopic $topicColor={getClassForTheme(topic)}>
+            <S.TopicText $topicColor={getClassForTheme(topic)}>{topic}</S.TopicText>
           </S.CardTopic>
           <CardButton id={id} />
         </S.CardsGroup>

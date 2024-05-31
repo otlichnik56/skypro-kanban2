@@ -9,11 +9,11 @@ function Column({ title, cards }) {
         <p>{title}</p>
       </S.ColumnTitle>
       <S.Cards>
-        {cards.map(({id, theme, title, date}) => (
+        {cards.map(({_id, topic, title, date}, index) => (
           <Card
-            key={id}
-            id={id}
-            theme={theme}
+            key={`card-${_id}-${index}`}
+            id={_id}
+            topic={topic}
             title={title}
             date={date}
           />

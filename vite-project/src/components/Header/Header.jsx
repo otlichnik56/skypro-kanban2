@@ -5,7 +5,7 @@ import { Contener } from "../shared.styled.js"
 import * as S from "./Header.styled.js"
 import { Link } from "react-router-dom";
 
-function Header({ cards, setCard }) {
+function Header({ }) {
 
   const [isUserSettingsVisible, setUserSettingsVisible] = useState(false);
 
@@ -13,34 +13,21 @@ function Header({ cards, setCard }) {
     setUserSettingsVisible(!isUserSettingsVisible);
   };
 
-  const onAddCard = () => {
-
-    const newCard = { id: Date.now(), 
-                      theme: "Web Design", 
-                      title: "Пробная задача",
-                      date: "16.05.2024", 
-                      status: "Без статуса" };
-
-    const newCardList = [...cards, newCard];
-
-    setCard(newCardList);
-    
-  }
 
   return (
     <S.Header>
       <Contener>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="" target="_self"><img src={logo} alt="logo" /></a>
+            <a href="" target="_self"><S.HeaderLogoImage src={logo} alt="logo" /></a>
           </S.HeaderLogo>
           <S.HeaderLogo>
-            <a href="" target="_self"><img src={logoDark} alt="logo" /></a>
+            <a href="" target="_self"><S.HeaderLogoImage src={logoDark} alt="logo" /></a>
           </S.HeaderLogo>
 
           <S.HeaderNav>
 
-            <button onClick={onAddCard} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
+            <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to="/newcard">Создать новую задачу</Link></button>
 
             <a href="#user-set-target" className="header__user _hover02" onClick={toggleUserSettings}>Ivan Ivanov</a>
 

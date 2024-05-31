@@ -1,9 +1,39 @@
-//import { Link } from "react-router-dom";
-import '../../App.css';
+//import '../../App.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "../../components/shared.styled.js"
 import { GlobalSignStyle } from '../../global.styled.js';
+import { loginUser } from "../../services/api.js";
+import { removeUserFromLocalStorage, saveUserToLocalStorage } from "../../services/helper.js";
 
 function LoginPage (){
+
+  removeUserFromLocalStorage();
+  const navigate = useNavigate();
+
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+
+  const handleGetUserClick = async () => {
+
+    try{
+      if(!login && !password){
+        setLoginError("Введите логин и пароль");
+        return;
+      }  
+      const user = await loginUser({login: login, password: password});
+      saveUserToLocalStorage(user);  
+      setLogin("");
+      setPassword("");
+      setLoginError("");
+      navigate("/");
+    } catch (error) {
+      setLoginError(error.message);
+    }
+    
+  }
+
   return (
     <>
       <GlobalSignStyle />
@@ -15,9 +45,12 @@ function LoginPage (){
                 <h4>Вход</h4>
               </S.ModalTtl>
               <S.ModalForm>
-                <S.EmailInput />
-                <S.PasswordInput />
-                <S.ModalButton><S.StyledBtmLink to="/">Войти</S.StyledBtmLink></S.ModalButton>
+                <S.EmailInput value={login} onChange={(event) => {setLogin(event.target.value)}} />
+                <S.PasswordInput value={password} onChange={(event) => {setPassword(event.target.value)}} />
+                {loginError && <S.ModalError>{loginError}</S.ModalError>}
+                <S.ModalButton onClick={handleGetUserClick}>
+                  Войти
+                </S.ModalButton>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
                   <S.StyledLink to="/reg">Регистрируйтесь здесь</S.StyledLink>
