@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-//import '../../App.css';
 import Header from '../../components/Header/Header';
 import Content from '../../components/Content/Content';
 import { GlobalStyle } from '../../global.styled.js';
@@ -10,8 +9,6 @@ import { getUserFromLocalStorage } from '../../services/helper.js';
 import { useCards } from "../../hooks/useCards.js";
 
 function MainPage() {
-
-  //const [cards, setCards] = useState([]);
 
   const {cards, setCards} = useCards();
 

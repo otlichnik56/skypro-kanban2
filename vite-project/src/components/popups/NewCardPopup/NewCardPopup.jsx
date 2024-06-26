@@ -16,7 +16,7 @@ function NewCardPopup() {
         date: null
     });
 
-    const [selected, setSelected] = useState();
+    //const [selected, setSelected] = useState();
     const { setCards } = useCards();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
