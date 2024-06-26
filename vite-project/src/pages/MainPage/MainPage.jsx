@@ -7,15 +7,18 @@ import { Wrapper } from "../../components/shared.styled.js"
 import { Outlet } from "react-router-dom";
 import { getDatas } from '../../services/api.js';
 import { getUserFromLocalStorage } from '../../services/helper.js';
+import { useCards } from "../../hooks/useCards.js";
 
 function MainPage() {
 
-  const [cards, setCards] = useState([]);
+  //const [cards, setCards] = useState([]);
+
+  const {cards, setCards} = useCards();
 
   const [isLoading, setIsLoading] = useState(false);
   
   const [user, setUser] = useState(getUserFromLocalStorage());
-
+  
   const [cardsError, setCardsError] = useState("");
 
   const getToken = () => {

@@ -2,8 +2,12 @@ import CardButton from '../CardButton/CardButton';
 import CardDate from '../CardDate/CardDate';
 import * as S from "./Card.styled.js"
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { ru } from 'date-fns/locale';
 
 function Card({ id, topic, title, date }) {
+
+  const formatedDate = format(date, 'dd.MM.yyyy', {locale: ru});
 
   return (
     <S.CardsItem>
@@ -18,7 +22,7 @@ function Card({ id, topic, title, date }) {
           <Link to={`/card/${id}`}>
             <S.CardsTitle>{title}</S.CardsTitle>
           </Link>
-          <CardDate date={date} />
+          <CardDate date={formatedDate} />
         </S.CardContent>
       </S.CardsCard>
     </S.CardsItem>

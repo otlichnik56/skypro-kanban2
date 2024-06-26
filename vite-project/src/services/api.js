@@ -8,7 +8,29 @@ export async function getDatas({ token }) {
     },
   });
   if(!response.ok){
-    throw Error("Ошибка сервера, он устал")
+    throw Error("Ошибка сервера, он устал");
+  }
+  const cards = await response.json();
+  return cards;
+}
+
+export async function postData({ token, task }) {
+  const response = await fetch(baseHost + "kanban", {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      title: task.title,
+      topic: task.topic,
+      status: task.status,
+      description: task.description,
+      date: task.date
+    }),
+  });
+  if(!response.ok){
+    const message = await response.json();
+    throw Error(message.error);
   }
   const cards = await response.json();
   return cards;
@@ -42,7 +64,7 @@ export async function loginUser({ login, password }) {
   });
   if(!response.ok){
     const message = await response.json();
-    throw Error(message.error)
+    throw Error(message.error);
   }
   const data = await response.json();
   return data;

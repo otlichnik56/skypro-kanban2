@@ -89,3 +89,38 @@ body {
   background-color: #EAEEF6;
 }
 `;
+
+export const GlobalCalendarStyles = createGlobalStyle`
+  .rdp {
+    color: #94A6BE;
+    font-size: 10px;
+    --rdp-cell-size: 26px;
+    --rdp-caption-font-size: 14px;
+    margin: 0em;
+  }
+
+  .rdp-caption {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .rdp-table {
+    margin-bottom: 10px;
+  }
+
+  .rdp-nav_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+  }
+
+`;
+

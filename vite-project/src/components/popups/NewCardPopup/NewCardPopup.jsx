@@ -1,136 +1,160 @@
-//import React, { useState } from 'react';
+import React, { useState } from 'react';
 import CalendarContent from '../../CalendarContent/CalendarContent';
+import * as S from './NewCardPopup.styled';
+import { useCards } from "../../../hooks/useCards";
+import { useUser } from "../../../hooks/useUser";
+import { useNavigate } from 'react-router-dom';
+import { postData } from '../../../services/api';
 
 function NewCardPopup() {
 
-    return (
-        
-        <div className="pop-new-card" id="popNewCard">
-            <div className="pop-new-card__container">
-            <div className="pop-new-card__block">
-                <div className="pop-new-card__content">
-                <h3 className="pop-new-card__ttl">Создание задачи</h3>
-                <a href="/" className="pop-new-card__close">&#10006;</a>
-                <div className="pop-new-card__wrap">
+    const [task, setTask] = useState({
+        title: "Новая задача",
+        topic: "Research",
+        status: "Без статуса",
+        description: "Подробное описание задачи",
+        date: null
+    });
 
-                    <form className="pop-new-card__form form-new" id="formNewCard" action="#">
+    const [selected, setSelected] = useState();
+    const { setCards } = useCards();
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-                    <div className="form-new__block">
-                        <label htmlFor="formTitle" className="subttl">Название задачи</label>
+    const { userData } = useUser();
 
-                        <input
-                        className="form-new__input"
-                        type="text"
-                        name="name"
-                        id="formTitle"
-                        placeholder="Введите название задачи..."
-                        autoFocus=""
-                        />
+    const getToken = () => {
+      const token = userData ? `Bearer ${userData.user.token}` : undefined;
+      return token;
+    };
 
-                    </div>
+    const token = getToken();
 
-                    <div className="form-new__block">
-                        <label htmlFor="textArea" className="subttl">Описание задачи</label>
-                        <textarea className="form-new__area" name="text" id="textArea"  placeholder="Введите описание задачи..."></textarea>
-                    </div>
-
-                    </form>
-
-                    <div className="pop-new-card__calendar calendar">
-                        <p className="calendar__ttl subttl">Даты</p>									
-                        <div className="calendar__block">
-                            <div className="calendar__nav">
-                            <div className="calendar__month">Сентябрь 2023</div>
-                            <div className="nav__actions">
-                                <div className="nav__action" data-action="prev">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11">
-                                    <path d="M5.72945 1.95273C6.09018 1.62041 6.09018 1.0833 5.72945 0.750969C5.36622 0.416344 4.7754 0.416344 4.41218 0.750969L0.528487 4.32883C-0.176162 4.97799 -0.176162 6.02201 0.528487 6.67117L4.41217 10.249C4.7754 10.5837 5.36622 10.5837 5.72945 10.249C6.09018 9.9167 6.09018 9.37959 5.72945 9.04727L1.87897 5.5L5.72945 1.95273Z" />
-                                </svg>
-                                </div>
-                                <div className="nav__action" data-action="next">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11">
-                                    <path d="M0.27055 9.04727C-0.0901833 9.37959 -0.0901832 9.9167 0.27055 10.249C0.633779 10.5837 1.2246 10.5837 1.58783 10.249L5.47151 6.67117C6.17616 6.02201 6.17616 4.97799 5.47151 4.32883L1.58782 0.75097C1.2246 0.416344 0.633778 0.416344 0.270549 0.75097C-0.0901831 1.0833 -0.090184 1.62041 0.270549 1.95273L4.12103 5.5L0.27055 9.04727Z" />
-                                </svg>
-                                </div>
-                            </div>
-                            </div>
-                            
-                            <CalendarContent />
-                                                        
-                            <input type="hidden" id="datepick_value" 
-                                    defaultValue="08.10.2023" />
-
-
-                            <div className="calendar__period">
-                            <p className="calendar__p date-end">Выберите срок исполнения <span className="date-control"></span>.</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="pop-new-card__categories categories">
-                    <p className="categories__p subttl">Категория</p>
-                    <div className="categories__themes">
-                    <div className="categories__theme _orange _active-category">
-                        <p className="_orange">Web Design</p>
-                    </div>
-                    <div className="categories__theme _green">
-                        <p className="_green">Research</p>
-                    </div>
-                    <div className="categories__theme _purple">
-                        <p className="_purple">Copywriting</p>
-                    </div>
-                    </div>
-                </div>
-
-                <button className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
-    );
-  }
-  
-  export default NewCardPopup;
-
-
-
-  
-    /**
-    const [theme, setTheme] = useState('');
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
-
-    const handleSubmit = (e) => {
+    const createTask = (e) => {
         e.preventDefault();
-        const newCard = { id: Date.now(), 
-                        theme: "Web Design", 
-                        title, 
-                        date: Date.now(), 
-                        status: "Без статуса" };
-        onAddCard(newCard);
-        setTheme('');
-        setTitle('');
-        setDate('');
-    };*/
 
+        if (!task.title || !task.description || !task.date) {
+            setError("Заполните поля, пожалуйста ... наверно!")
+            return;            
+        }
 
-    /**
-     <input type="hidden" id="datepick_value" value={date} onChange={e => setDate(e.target.value)} />
-    
-    <input
-        className="form-new__input"
-        type="text"
-        name="name"
-        id="formTitle"
-        placeholder="Введите название задачи..."
-        autoFocus=""
-        value={title} onChange={e => setTitle(e.target.value)}
-    />
+        setIsLoading(true);
 
-    <button onClick={handleSubmit} className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
-    */
+        postData({ token: token, task: task })
+            .then((cards) => {
+                setCards(cards.tasks);
+                navigate("/");
+            })
+            .catch((error) => {
+                setError(error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
 
+    const [activeCategory, setActiveCategory] = useState('Web Design');
+
+    const handleCategoryClick = (category) => {
+        setActiveCategory(category);
+        setTask((prevTask) => ({ ...prevTask, topic: category }));
+    };
+
+    const handleTaskNameChange = (e) => {
+        const newTitle = e.target.value;
+        setTask((prevTask) => ({ ...prevTask, title: newTitle }));
+    };
+
+    const handleTaskDescriptionChange = (e) => {
+        const newDescription = e.target.value;
+        setTask((prevTask) => ({ ...prevTask, description: newDescription }));
+    };
+
+    return (
+        <S.PopNewCard id="popNewCard">
+            <S.PopNewCardContainer>
+                <S.PopNewCardBlock>
+                    <S.PopNewCardContent>
+                        <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
+                        <S.PopNewCardClose href="/">&#10006;</S.PopNewCardClose>
+                        <S.PopNewCardWrap>
+                            <S.FormNewCard id="formNewCard" action="#">
+                                <S.FormNewBlock>
+                                    <label htmlFor="formTitle" className="subttl">Название задачи</label>
+                                    <S.FormNewInput
+                                        type="text"
+                                        name="name"
+                                        id="formTitle"
+                                        placeholder="Введите название задачи..."
+                                        autoFocus=""
+                                        value={task.title}
+                                        onChange={handleTaskNameChange}
+                                    />
+                                </S.FormNewBlock>
+                                <S.FormNewBlock>
+                                    <label htmlFor="textArea" className="subttl">Описание задачи</label>
+                                    <S.FormNewArea
+                                        name="text"
+                                        id="textArea"
+                                        placeholder="Введите описание задачи..."
+                                        value={task.description}
+                                        onChange={handleTaskDescriptionChange}
+                                    />
+                                </S.FormNewBlock>
+                            </S.FormNewCard>
+                            <S.Calendar className="calendar">
+                                <S.CalendarTtl className="calendar__ttl subttl">Даты</S.CalendarTtl>
+                                <S.CalendarBlock>
+                                    <CalendarContent selected={task.date} setSelected={(date) => setTask({...task, date})} />
+                                    <input type="hidden" id="datepick_value" defaultValue="08.10.2023" />
+                                    <S.CalendarPeriod>
+                                        <S.CalendarP className="calendar__p date-end">
+                                            Выберите срок исполнения <span className="date-control"></span>.
+                                        </S.CalendarP>
+                                    </S.CalendarPeriod>
+                                </S.CalendarBlock>
+                            </S.Calendar>
+                        </S.PopNewCardWrap>
+                        <S.Categories>
+                            <S.CategoriesP className="categories__p subttl">Категория</S.CategoriesP>
+                            <S.CategoriesThemes>
+                                <S.CategoriesThemeOrange
+                                    className={activeCategory === 'Web Design' ? 'active-category' : ''}
+                                    onClick={() => handleCategoryClick('Web Design')}
+                                >
+                                    <p>Web Design</p>
+                                </S.CategoriesThemeOrange>
+                                <S.CategoriesThemeGreen
+                                    className={activeCategory === 'Research' ? 'active-category' : ''}
+                                    onClick={() => handleCategoryClick('Research')}
+                                >
+                                    <p>Research</p>
+                                </S.CategoriesThemeGreen>
+                                <S.CategoriesThemePurple
+                                    className={activeCategory === 'Copywriting' ? 'active-category' : ''}
+                                    onClick={() => handleCategoryClick('Copywriting')}
+                                >
+                                    <p>Copywriting</p>
+                                </S.CategoriesThemePurple>
+                            </S.CategoriesThemes>
+                        </S.Categories>
+
+                        {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
+
+                        <S.Hover01 as={S.FormNewCreateButton} onClick={createTask} id="btnCreate">
+                            Создать задачу
+                        </S.Hover01>
+                    </S.PopNewCardContent>
+                </S.PopNewCardBlock>
+            </S.PopNewCardContainer>
+            {isLoading && (
+                <S.LoaderWrapper>
+                    <S.Loader />
+                </S.LoaderWrapper>
+            )}
+        </S.PopNewCard>
+    );
+}
+
+export default NewCardPopup;

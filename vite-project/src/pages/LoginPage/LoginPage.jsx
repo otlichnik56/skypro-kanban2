@@ -1,15 +1,18 @@
-//import '../../App.css';
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../../components/shared.styled.js"
 import { GlobalSignStyle } from '../../global.styled.js';
 import { loginUser } from "../../services/api.js";
-import { removeUserFromLocalStorage, saveUserToLocalStorage } from "../../services/helper.js";
+import { useUser } from "../../hooks/useUser.js";
 
 function LoginPage (){
 
-  removeUserFromLocalStorage();
+  const { logout, logon } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    logout();
+  }, [logout]);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -22,8 +25,8 @@ function LoginPage (){
         setLoginError("Введите логин и пароль");
         return;
       }  
-      const user = await loginUser({login: login, password: password});
-      saveUserToLocalStorage(user);  
+      const user = await loginUser({login, password});
+      logon(user);  
       setLogin("");
       setPassword("");
       setLoginError("");

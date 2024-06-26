@@ -1,14 +1,18 @@
-//import '../../App.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../../components/shared.styled.js"
 import { GlobalSignStyle } from '../../global.styled.js';
 import { registerUser } from '../../services/api.js';
-import { removeUserFromLocalStorage, saveUserToLocalStorage } from "../../services/helper.js";
+import { useUser } from "../../hooks/useUser.js";
 
 function RegPage (){
 
-    removeUserFromLocalStorage();
+    const { logout, logon } = useUser();
+
+    useEffect(() => {
+        logout();
+    }, [logout]);
+
     const navigate = useNavigate();
 
     const [login, setLogin] = useState("");
@@ -24,7 +28,7 @@ function RegPage (){
                 return;
               }          
             const user = await registerUser({login: login, name: name, password: password});
-            saveUserToLocalStorage(user);
+            logon(user);
             setLogin("");
             setName("");
             setPassword("");

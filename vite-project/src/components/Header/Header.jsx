@@ -4,8 +4,11 @@ import logoDark from '/images/logo_dark.png';
 import { Contener } from "../shared.styled.js"
 import * as S from "./Header.styled.js"
 import { Link } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 function Header({ }) {
+
+  const { userData } = useUser();
 
   const [isUserSettingsVisible, setUserSettingsVisible] = useState(false);
 
@@ -29,12 +32,12 @@ function Header({ }) {
 
             <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to="/newcard">Создать новую задачу</Link></button>
 
-            <a href="#user-set-target" className="header__user _hover02" onClick={toggleUserSettings}>Ivan Ivanov</a>
+            <a href="#user-set-target" className="header__user _hover02" onClick={toggleUserSettings}>{userData.user.name}</a>
 
             {isUserSettingsVisible && (
               <div className="header__pop-user-set pop-user-set" id="user-set-target">
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+                <p className="pop-user-set__name">{userData.user.name}</p>
+                <p className="pop-user-set__mail">{userData.user.login}</p>
                 <div className="pop-user-set__theme">
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />
