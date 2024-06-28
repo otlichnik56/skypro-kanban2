@@ -40,6 +40,6 @@ function getClassForTheme(theme) {
       default:
         return '_default'; 
     }
-  }
+}
 
 export default Card;

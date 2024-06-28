@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const CalendarWrapper = styled.div`
   width: 182px;
   margin-bottom: 20px;
+  margin-top: 0px;
 `;
 
 export const CalendarContent = styled.div`
   margin-bottom: 12px;
+  margin-top: 0px;
 `;
 
 export const CalendarDaysNames = styled.div`
@@ -14,8 +16,8 @@ export const CalendarDaysNames = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  margin: 7px 0;
   padding: 0 7px;
+  margin-top: 0px;
 `;
 
 export const CalendarDayName = styled.div`

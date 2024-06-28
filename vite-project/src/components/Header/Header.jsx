@@ -39,8 +39,7 @@ function Header({ }) {
                 <p className="pop-user-set__name">{userData.user.name}</p>
                 <p className="pop-user-set__mail">{userData.user.login}</p>
                 <div className="pop-user-set__theme">
-                  <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
+                  
                 </div>
                 <button type="button" className="_hover03"><Link to="/exit">Выйти</Link></button>
               </div>
@@ -59,6 +58,10 @@ export default Header;
 
   
   /** нужно будет для переключения темы
+  <p>Темная тема</p>
+  <input type="checkbox" className="checkbox" name="checkbox" /> 
+   
+  
   const [isDarkMode, setDarkMode] = useState(false);
   useEffect(() => {
     const themeLink = document.getElementById('theme-style');

@@ -9,10 +9,10 @@ import { postData } from '../../../services/api';
 function NewCardPopup() {
 
     const [task, setTask] = useState({
-        title: "Новая задача",
-        topic: "Research",
+        title: "",
+        topic: "",
         status: "Без статуса",
-        description: "Подробное описание задачи",
+        description: "",
         date: null
     });
 
@@ -29,13 +29,15 @@ function NewCardPopup() {
       return token;
     };
 
+    const nowDate = new Date();
+
     const token = getToken();
 
     const createTask = (e) => {
         e.preventDefault();
 
         if (!task.title || !task.description || !task.date) {
-            setError("Заполните поля, пожалуйста ... наверно!")
+            setError("Заполните поля, пожалуйста ... наверно!");
             return;            
         }
 
@@ -107,7 +109,7 @@ function NewCardPopup() {
                                 <S.CalendarTtl className="calendar__ttl subttl">Даты</S.CalendarTtl>
                                 <S.CalendarBlock>
                                     <CalendarContent selected={task.date} setSelected={(date) => setTask({...task, date})} />
-                                    <input type="hidden" id="datepick_value" defaultValue="08.10.2023" />
+                                    <input type="hidden" id="datepick_value" defaultValue={nowDate} />
                                     <S.CalendarPeriod>
                                         <S.CalendarP className="calendar__p date-end">
                                             Выберите срок исполнения <span className="date-control"></span>.

@@ -1,31 +1,36 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
+  const getUserFromLocalStorage = () => {
+    const userInfo = localStorage.getItem("user");
+    return userInfo ? JSON.parse(userInfo) : null;
+  };
 
-    const getUserFromLocalStorage = () => {
-        const userInfo = localStorage.getItem("user");
-        return userInfo ? JSON.parse(userInfo) : null;
-    };
-   
-    const [userData, setUserData] = useState(getUserFromLocalStorage());
+  const [userData, setUserData] = useState(getUserFromLocalStorage());
 
-    const logout = () => {
-        setUserData(null);
-        localStorage.removeItem("user");
-    };
+  useEffect(() => {
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [userData]);
 
-    const logon = (newUser) => {
-        setUserData(newUser);
-        localStorage.setItem("user", JSON.stringify(newUser));
-    };
+  const logout = () => {
+    setUserData(null);
+  };
 
-    return (
-        <UserContext.Provider value = {{ userData, logout, logon}}>
-            {children}
-        </UserContext.Provider>
-    );
+  const logon = (newUser) => {
+    setUserData(newUser);
+  };
+
+  return (
+    <UserContext.Provider value={{ userData, logout, logon }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserProvider;

@@ -36,6 +36,43 @@ export async function postData({ token, task }) {
   return cards;
 }
 
+export async function putData({ token, task }) {
+  const response = await fetch(baseHost + "kanban/" + task.id, {
+    method: "PUT",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      title: task.title,
+      topic: task.topic,
+      status: task.status,
+      description: task.description,
+      date: task.date
+    }),
+  });
+  if(!response.ok){
+    const message = await response.json();
+    throw Error(message.error);
+  }
+  const cards = await response.json();
+  return cards;
+}
+
+export async function deleteData({ token, id }) {
+  const response = await fetch(baseHost + "kanban/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    }
+  });
+  if(!response.ok){
+    const message = await response.json();
+    throw Error(message.error);
+  }
+  const cards = await response.json();
+  return cards;
+}
+
 
 export async function registerUser({ login, name, password}) {
   const response = await fetch(baseHost + "user", {

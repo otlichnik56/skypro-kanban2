@@ -104,7 +104,6 @@ export const GlobalCalendarStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 6px;
     margin-bottom: 10px;
     font-size: 14px;
   }
