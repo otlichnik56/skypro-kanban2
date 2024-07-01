@@ -4,6 +4,7 @@ import * as S from "./Card.styled.js"
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ru } from 'date-fns/locale';
+import { getClassForTheme } from '../../services/helper.js';
 
 function Card({ id, topic, title, date }) {
 
@@ -27,19 +28,6 @@ function Card({ id, topic, title, date }) {
       </S.CardsCard>
     </S.CardsItem>
   );
-}
-
-function getClassForTheme(theme) {
-    switch (theme) {
-      case 'Web Design':
-        return '_orange';
-      case 'Research':
-        return '_green';
-      case 'Copywriting':
-        return '_purple';
-      default:
-        return '_default'; 
-    }
 }
 
 export default Card;

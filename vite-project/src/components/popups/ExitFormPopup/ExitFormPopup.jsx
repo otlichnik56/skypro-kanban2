@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import * as S from "./ExitFormPopup.styled.js";
+import { appRoutes } from "../../../services/helper.js";
 
 function ExitFormPopup() {
   const { logout } = useUser();
@@ -9,7 +10,7 @@ function ExitFormPopup() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate(appRoutes.LOGIN);
   };
 
   return (
@@ -24,7 +25,7 @@ function ExitFormPopup() {
               Да, выйти
             </S.YesButton>
             <S.NoButton className="_hover03" id="exitNo">
-              <Link to="/">Нет, остаться</Link>
+              <Link to={appRoutes.MAIN}>Нет, остаться</Link>
             </S.NoButton>
           </S.FormGroup>
         </form>

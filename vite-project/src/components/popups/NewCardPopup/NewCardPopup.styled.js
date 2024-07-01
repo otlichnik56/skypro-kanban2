@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
+
 export const Hover01 = styled.button`
   &:hover {
     background-color: #33399b;
@@ -241,8 +242,8 @@ export const LoaderWrapper = styled.div`
 `;
 
 export const Loader = styled.div`
-  border: 16px solid #94A6BE; /* Light grey */
-  border-top: 16px solid #565EEF; /* Blue */
+  border: 8px solid #94A6BE; 
+  border-top: 12px solid #565EEF; 
   border-radius: 50%;
   width: 120px;
   height: 120px;

@@ -36,8 +36,8 @@ export async function postData({ token, task }) {
   return cards;
 }
 
-export async function putData({ token, task }) {
-  const response = await fetch(baseHost + "kanban/" + task.id, {
+export async function putData({ token, id, task }) {
+  const response = await fetch(baseHost + "kanban/" + id, {
     method: "PUT",
     headers: {
       Authorization: token,

@@ -4,6 +4,7 @@ import * as S from "../../components/shared.styled.js";
 import { GlobalSignStyle } from '../../global.styled.js';
 import { loginUser } from "../../services/api.js";
 import { useUser } from "../../hooks/useUser.js";
+import { appRoutes } from "../../services/helper.js";
 
 function LoginPage() {
   const { logout, logon, userData } = useUser();
@@ -15,7 +16,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (userData) {
-      navigate("/");
+      navigate(appRoutes.MAIN);
     }
   }, [userData, navigate]);
 
@@ -54,7 +55,7 @@ function LoginPage() {
                 </S.ModalButton>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
-                  <S.StyledLink to="/reg">Регистрируйтесь здесь</S.StyledLink>
+                  <S.StyledLink to={appRoutes.REG}>Регистрируйтесь здесь</S.StyledLink>
                 </S.ModalFormGroup>
               </S.ModalForm>
             </S.ModalBlock>

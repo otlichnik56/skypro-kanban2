@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 import { topicStyles } from "../../../lib/topic";
+import { Link } from "react-router-dom";
+
+
+export const StyledLink = styled(Link)`
+  color: #ffffff;
+  font-weight: bold;
+`;
+
 
 export const PopupContainer = styled.div`
     width: 100%;
@@ -82,11 +90,16 @@ export const StatusThemes = styled.div`
 export const StatusTheme = styled.div`
     border-radius: 24px;
     border: 0.7px solid rgba(148, 166, 190, 0.4);
-    color: #fff;
+    color: #94A6BE;
     padding: 11px 14px 10px;
     margin-right: 7px;
     margin-bottom: 7px;
-    background: #94A6BE;
+    background: #fff;
+    cursor: pointer; 
+    &.active-status {
+        background: #94A6BE;
+        color: #fff;
+    }
 `;
 
 export const Wrap = styled.div`
@@ -106,7 +119,7 @@ export const TextArea = styled.textarea`
     width: 100%;
     outline: none;
     padding: 14px;
-    background: #EAEEF6;
+    background: ${({ $isEditing }) => ($isEditing ? '#FFFFFF' : '#EAEEF6')};
     border: 0.7px solid rgba(148, 166, 190, 0.4);
     border-radius: 8px;
     font-size: 14px;
@@ -125,11 +138,15 @@ export const ButtonGroup = styled.div`
     justify-content: space-between;
 `;
 
-export const Button = styled.button`
+export const Button03 = styled.button`
     height: 30px;
     margin-bottom: 10px;
+    margin-right: 10px;
     padding: 0 14px;
+    border: 0.7px solid var(--palette-navy-60, #565EEF);
+    color: #565EEF;
     border-radius: 4px;
+    background: transparent;
     outline: none;
     &.btn-browse__edit,
     &.btn-edit__edit {
@@ -155,3 +172,37 @@ export const Button = styled.button`
     }
 `;
 
+export const Button01 = styled.button`
+    height: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    padding: 0 14px;
+    border-radius: 4px;
+    border: 0.7px solid var(--palette-navy-60, #565EEF);
+    color: #FFFFFF;
+    background: #565EEF;
+    outline: none;
+    &.btn-browse__edit,
+    &.btn-edit__edit {
+        border: 0.7px solid #565EEF;
+        background: #565EEF;
+        color: #FFFFFF;
+    }
+    &.btn-browse__delete,
+    &.btn-edit__delete {
+        border: 0.7px solid #565EEF;
+        background: #565EEF;
+        color: #FFFFFF;
+    }
+    &.btn-browse__close,
+    &.btn-edit__close {
+        background: #565EEF;
+        border: #565EEF;
+        color: #FFFFFF;
+    }
+    &:hover {
+        background-color: #33399b;
+        border: none;
+        color: #FFFFFF;
+    }
+`;

@@ -1,50 +1,54 @@
 import React, { useState } from 'react';
 import logo from '/images/logo.png';
 import logoDark from '/images/logo_dark.png';
-import { Contener } from "../shared.styled.js"
-import * as S from "./Header.styled.js"
+import { Contener } from "../shared.styled.js";
+import * as S from "./Header.styled.js";
 import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import { appRoutes } from '../../services/helper.js';
 
-function Header({ }) {
-
+function Header() {
   const { userData } = useUser();
-
   const [isUserSettingsVisible, setUserSettingsVisible] = useState(false);
 
   const toggleUserSettings = () => {
     setUserSettingsVisible(!isUserSettingsVisible);
   };
 
-
   return (
     <S.Header>
       <Contener>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="" target="_self"><S.HeaderLogoImage src={logo} alt="logo" /></a>
+            <a href="" target="_self">
+              <S.HeaderLogoImage src={logo} alt="logo" />
+            </a>
           </S.HeaderLogo>
           <S.HeaderLogo>
-            <a href="" target="_self"><S.HeaderLogoImage src={logoDark} alt="logo" /></a>
+            <a href="" target="_self">
+              <S.HeaderLogoImage src={logoDark} alt="logo" />
+            </a>
           </S.HeaderLogo>
 
           <S.HeaderNav>
+            <S.ButtonMainNew id="btnMainNew">
+              <Link to={appRoutes.NEWCARD}>Создать новую задачу</Link>
+            </S.ButtonMainNew>
 
-            <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to="/newcard">Создать новую задачу</Link></button>
-
-            <a href="#user-set-target" className="header__user _hover02" onClick={toggleUserSettings}>{userData.user.name}</a>
+            <S.UserLink href="#user-set-target" onClick={toggleUserSettings}>
+              {userData.user.name}
+            </S.UserLink>
 
             {isUserSettingsVisible && (
-              <div className="header__pop-user-set pop-user-set" id="user-set-target">
-                <p className="pop-user-set__name">{userData.user.name}</p>
-                <p className="pop-user-set__mail">{userData.user.login}</p>
-                <div className="pop-user-set__theme">
-                  
-                </div>
-                <button type="button" className="_hover03"><Link to="/exit">Выйти</Link></button>
-              </div>
+              <S.UserSettings id="user-set-target">
+                <S.UserName>{userData.user.name}</S.UserName>
+                <S.UserEmail>{userData.user.login}</S.UserEmail>
+                <S.ThemeSwitch></S.ThemeSwitch>
+                <S.LogoutButton type="button">
+                  <Link to={appRoutes.EXIT}>Выйти</Link>
+                </S.LogoutButton>
+              </S.UserSettings>
             )}
-
           </S.HeaderNav>
         </S.HeaderBlock>
       </Contener>
@@ -53,26 +57,3 @@ function Header({ }) {
 }
 
 export default Header;
-
-
-
-  
-  /** нужно будет для переключения темы
-  <p>Темная тема</p>
-  <input type="checkbox" className="checkbox" name="checkbox" /> 
-   
-  
-  const [isDarkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    const themeLink = document.getElementById('theme-style');
-    if (isDarkMode) {
-      themeLink.href = '/css/dark-theme.css'; 
-    } else {
-      themeLink.href = '/css/light-theme.css'; 
-    }
-  }, [isDarkMode]);
-  const toggleTheme = () => {
-    setDarkMode(!isDarkMode);
-  };
-  <button className="header__btn-main-new _hover01" id="btnMainNew"><a href="#popNewCard">Создать новую задачу</a></button>
-  */

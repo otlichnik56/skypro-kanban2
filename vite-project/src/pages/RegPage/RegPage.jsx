@@ -4,6 +4,7 @@ import * as S from "../../components/shared.styled.js"
 import { GlobalSignStyle } from '../../global.styled.js';
 import { registerUser } from '../../services/api.js';
 import { useUser } from "../../hooks/useUser.js";
+import { appRoutes } from "../../services/helper.js";
 
 function RegPage (){
 
@@ -33,7 +34,7 @@ function RegPage (){
             setName("");
             setPassword("");
             setRegError("");
-            navigate("/");
+            navigate(appRoutes.MAIN);
         } catch(error){
             setRegError(error.message);
         }
@@ -60,7 +61,7 @@ function RegPage (){
                                 </S.ModalButton>
                                 <S.ModalFormGroup>
                                     <p>Уже есть аккаунт?  
-                                        <S.StyledLink to="/login">Войдите здесь</S.StyledLink>
+                                        <S.StyledLink to={appRoutes.LOGIN}>Войдите здесь</S.StyledLink>
                                     </p>
                                 </S.ModalFormGroup>
                             </S.ModalForm>

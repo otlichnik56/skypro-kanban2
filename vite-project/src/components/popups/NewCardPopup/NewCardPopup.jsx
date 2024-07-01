@@ -5,6 +5,7 @@ import { useCards } from "../../../hooks/useCards";
 import { useUser } from "../../../hooks/useUser";
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../../../services/api';
+import { appRoutes } from '../../../services/helper';
 
 function NewCardPopup() {
 
@@ -16,7 +17,6 @@ function NewCardPopup() {
         date: null
     });
 
-    //const [selected, setSelected] = useState();
     const { setCards } = useCards();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +46,7 @@ function NewCardPopup() {
         postData({ token: token, task: task })
             .then((cards) => {
                 setCards(cards.tasks);
-                navigate("/");
+                navigate(appRoutes.MAIN);
             })
             .catch((error) => {
                 setError(error);
@@ -79,7 +79,7 @@ function NewCardPopup() {
                 <S.PopNewCardBlock>
                     <S.PopNewCardContent>
                         <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
-                        <S.PopNewCardClose href="/">&#10006;</S.PopNewCardClose>
+                        <S.PopNewCardClose href={appRoutes.MAIN}>&#10006;</S.PopNewCardClose>
                         <S.PopNewCardWrap>
                             <S.FormNewCard id="formNewCard" action="#">
                                 <S.FormNewBlock>
@@ -112,7 +112,7 @@ function NewCardPopup() {
                                     <input type="hidden" id="datepick_value" defaultValue={nowDate} />
                                     <S.CalendarPeriod>
                                         <S.CalendarP className="calendar__p date-end">
-                                            Выберите срок исполнения <span className="date-control"></span>.
+                                            Выберите срок исполнения <span className="date-control">{task.date ? task.date.toLocaleDateString('ru-RU') : 'Не выбрано'}</span>.
                                         </S.CalendarP>
                                     </S.CalendarPeriod>
                                 </S.CalendarBlock>
