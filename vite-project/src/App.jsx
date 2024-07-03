@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-//import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import MainPage from './pages/MainPage/MainPage.jsx';
